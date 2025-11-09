@@ -1,4 +1,4 @@
-discord.py==2.4.1      # Für den Discord-Bot
+discord.py             # Für den Discord-Bot
 Flask==2.2.5           # Für die Web-App / Website
 requests               # Für API-Abfragen (Exaroton)
 pytz                   # Für Zeit-Zonen Berechnungen (z.B. Berlin/CET)
