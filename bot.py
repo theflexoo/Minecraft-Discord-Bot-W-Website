@@ -63,12 +63,18 @@ async def status_loop():
     if not server:
         return
 
-    # --- Auto-Reset um Mitternacht ---
-    now_berlin = datetime.now(ZoneInfo("Europe/Berlin"))
-    if last_reset_day != now_berlin.date():
-        player_sessions = {}
-        last_reset_day = now_berlin.date()
+# === Auto-Reset um Mitternacht (einmal täglich) ===
+now_berlin = datetime.now(ZoneInfo("Europe/Berlin"))
 
+# Beim ersten Start setzen, falls None
+if last_reset_day is None:
+    last_reset_day = now_berlin.date()
+
+# Prüfen, ob ein neuer Tag begonnen hat
+if now_berlin.date() > last_reset_day:
+    player_sessions = {}  # Reset der Tagesdaten
+    last_reset_day = now_berlin.date()
+    
     status_code = server["status"]
     name = server["name"]
     player_info = server.get("players", {})
